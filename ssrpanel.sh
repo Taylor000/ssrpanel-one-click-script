@@ -75,7 +75,7 @@ EOF
 	#开启日志监控
 	yum -y install vixie-cron crontabs
 	rm -rf /var/spool/cron/root
-	echo '* * * * * php /www/wwwroot/ssrpanel/artisan schedule:run >> /dev/null 2>&1' >> /var/spool/cron/root
+	echo '* * * * * php /home/wwwroot/default/artisan schedule:run >> /dev/null 2>&1' >> /var/spool/cron/root
 	service crond restart
 	#修复数据库
 	# mv /home/wwwroot/default/phpmyadmin/ /home/wwwroot/default/public/
