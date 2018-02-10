@@ -1,5 +1,5 @@
 #!/bin/bash
-#Time: 2017年11月2日17:14:50
+#Time: 2018年2月10日11:39:10
 #Author: 十一
 #Blog: blog.67cc.cn
 #GitHub版
@@ -21,7 +21,7 @@ function install_ssrpanel(){
 		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip'
 	fi
 	rm -f ping.pl	
-	wget -c https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
+	 wget -c --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && rm -rf lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh lnmp
 	clear
 	#安装fileinfo必须组件
 	cd /root && wget --no-check-certificate $fileinfo
@@ -33,6 +33,8 @@ function install_ssrpanel(){
     unzip fileinfo.zip
     fi
 	cd /root/fileinfo && /usr/local/php/bin/phpize && ./configure --with-php-config=/usr/local/php/bin/php-config --with-fileinfo && make && make install
+	cd /home/wwwroot/
+	cp -r default/phpmyadmin/ .
 	cd /home/wwwroot/default/ && rm -rf index.html
 	git clone https://github.com/ssrpanel/ssrpanel.git tmp && mv tmp/.git . && rm -rf tmp && git reset --hard
 	#替换数据库配置
@@ -76,9 +78,9 @@ EOF
 	echo '* * * * * php /www/wwwroot/ssrpanel/artisan schedule:run >> /dev/null 2>&1' >> /var/spool/cron/root
 	service crond restart
 	#修复数据库
-	mv /home/wwwroot/default/phpmyadmin/ /home/wwwroot/default/public/
-	cd /home/wwwroot/default/public/phpmyadmin
-	chmod -R 755 *
+	# mv /home/wwwroot/default/phpmyadmin/ /home/wwwroot/default/public/
+	# cd /home/wwwroot/default/public/phpmyadmin
+	# chmod -R 755 *
 	lnmp restart
 	IPAddress=`wget http://members.3322.org/dyndns/getip -O - -q ; echo`;
 	echo "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
