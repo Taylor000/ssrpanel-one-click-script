@@ -21,7 +21,7 @@ function install_ssrpanel(){
 		fileinfo='https://gitee.com/marisn/ssrpanel-new/raw/master/fileinfo.zip'
 	fi
 	rm -f ping.pl	
-	 wget -c --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && rm -rf lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh lnmp
+	 wget -c --no-check-certificate https://raw.githubusercontent.com/echo-marisn/ssrpanel-one-click-script/master/lnmp1.4.zip && unzip lnmp1.4.zip && rm -rf lnmp1.4.zip && cd lnmp1.4 && chmod +x install.sh && ./install.sh
 	clear
 	#安装fileinfo必须组件
 	cd /root && wget --no-check-certificate $fileinfo
